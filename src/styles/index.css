@@ -80,6 +80,13 @@
   /* ── Layout ── */
   --max-width: 480px;
   --nav-height: 72px;
+
+  /* ── Breakpoints ── */
+  --bp-tablet: 768px;
+  --bp-desktop: 1100px;
+
+  /* ── Sidebar (desktop) ── */
+  --sidebar-width: 260px;
 }
 
 /* ── Reset & Base ── */
@@ -112,6 +119,45 @@ body {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+}
+
+/* ── Tablet layout ── */
+@media (min-width: 768px) {
+  #app {
+    max-width: 720px;
+  }
+}
+
+/* ── Desktop layout: sidebar + content ── */
+@media (min-width: 1100px) {
+  body {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  #app {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: visible;
+  }
+
+  /* Page content area on desktop */
+  .page {
+    margin-left: var(--sidebar-width);
+    max-width: 860px;
+    width: 100%;
+    padding: var(--space-8) var(--space-10) !important;
+    padding-bottom: var(--space-10) !important;
+  }
+
+  .onboarding-page {
+    margin-left: 0 !important;
+    max-width: 540px !important;
+    margin: 0 auto !important;
+    padding: var(--space-8) var(--space-6) !important;
+  }
 }
 
 /* ── Scrollbar ── */
@@ -293,6 +339,14 @@ img {
   padding: var(--space-5);
   padding-bottom: calc(var(--nav-height) + var(--space-8));
   min-height: 100vh;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: var(--space-6) var(--space-8);
+    padding-bottom: calc(var(--nav-height) + var(--space-8));
+  }
 }
 
 .page-header {

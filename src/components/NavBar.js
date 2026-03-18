@@ -61,15 +61,15 @@ export function updateNavBar() {
 }
 
 export const navBarStyles = `
+  /* ── Bottom Nav (mobile & tablet) ── */
   .bottom-nav {
     position: fixed;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
     width: 100%;
-    max-width: var(--max-width);
     height: var(--nav-height);
-    background: rgba(13, 13, 15, 0.85);
+    background: rgba(13, 13, 15, 0.9);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid var(--border-subtle);
@@ -79,6 +79,52 @@ export const navBarStyles = `
     padding: 0 var(--space-2);
     z-index: 100;
   }
+
+  @media (min-width: 768px) {
+    .bottom-nav {
+      max-width: 720px;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+  }
+
+  /* ── Sidebar Nav (desktop 1100px+) ── */
+  @media (min-width: 1100px) {
+    .bottom-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: auto;
+      transform: none;
+      width: var(--sidebar-width);
+      max-width: var(--sidebar-width);
+      height: 100vh;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      border-top: none;
+      border-right: 1px solid var(--border-subtle);
+      padding: var(--space-6) var(--space-4);
+      gap: var(--space-2);
+    }
+
+    .bottom-nav::before {
+      content: '🔥 Cal AI';
+      display: block;
+      font-size: var(--font-lg);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding: var(--space-2) var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+  }
+
   .bottom-nav__item {
     display: flex;
     flex-direction: column;
@@ -90,15 +136,44 @@ export const navBarStyles = `
     position: relative;
     -webkit-tap-highlight-color: transparent;
   }
+
+  @media (min-width: 1100px) {
+    .bottom-nav__item {
+      flex-direction: row;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      align-items: center;
+    }
+  }
+
   .bottom-nav__item:hover {
     background: var(--bg-card);
   }
   .bottom-nav__item.active .bottom-nav__label {
     color: var(--accent-primary);
   }
+
+  @media (min-width: 1100px) {
+    .bottom-nav__item.active {
+      background: rgba(163, 230, 53, 0.08);
+      border: 1px solid var(--border-accent);
+    }
+    .bottom-nav__item.active .bottom-nav__label {
+      color: var(--accent-primary);
+    }
+  }
+
   .bottom-nav__item--primary {
     margin-top: -20px;
   }
+
+  @media (min-width: 1100px) {
+    .bottom-nav__item--primary {
+      margin-top: 0;
+      order: -1;
+    }
+  }
+
   .bottom-nav__item--primary .bottom-nav__icon {
     width: 52px;
     height: 52px;
@@ -111,6 +186,15 @@ export const navBarStyles = `
     box-shadow: var(--shadow-glow);
     transition: box-shadow var(--duration-normal) var(--ease-out), transform var(--duration-fast) var(--ease-out);
   }
+
+  @media (min-width: 1100px) {
+    .bottom-nav__item--primary .bottom-nav__icon {
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+    }
+  }
+
   .bottom-nav__item--primary:hover .bottom-nav__icon {
     box-shadow: var(--shadow-glow-strong);
     transform: scale(1.05);
@@ -121,6 +205,7 @@ export const navBarStyles = `
   .bottom-nav__icon {
     font-size: 1.25rem;
     line-height: 1;
+    flex-shrink: 0;
   }
   .bottom-nav__label {
     font-size: 0.625rem;
@@ -128,6 +213,14 @@ export const navBarStyles = `
     color: var(--text-muted);
     transition: color var(--duration-fast) var(--ease-out);
   }
+
+  @media (min-width: 1100px) {
+    .bottom-nav__label {
+      font-size: var(--font-sm);
+      font-weight: 500;
+    }
+  }
+
   .bottom-nav__indicator {
     position: absolute;
     top: 0;
@@ -138,5 +231,11 @@ export const navBarStyles = `
     background: var(--accent-gradient);
     border-radius: var(--radius-full);
     animation: scaleIn 0.3s var(--ease-spring) both;
+  }
+
+  @media (min-width: 1100px) {
+    .bottom-nav__indicator {
+      display: none;
+    }
   }
 `;
